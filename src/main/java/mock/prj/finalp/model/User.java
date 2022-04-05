@@ -20,12 +20,15 @@ public class User {
     private String username;
     private String password;
     private String role;
-
-    @OneToMany(mappedBy = "userId")
-    @JsonBackReference
-    private Set<ParkingLot> parkingLotSet;
-
+    private String licensePlate;
+    private String vehicleColor;
+    private String vehicleBrand;
+    private String vehicleType;
     @OneToMany(mappedBy = "userId")
     @JsonBackReference
     private Set<UserInvoice> userInvoiceSet;
+
+    @OneToOne(mappedBy = "userId")
+    @JsonBackReference
+    private Slot slotId;
 }

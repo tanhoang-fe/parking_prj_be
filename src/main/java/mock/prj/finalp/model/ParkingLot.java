@@ -23,7 +23,4 @@ public class ParkingLot {
     @JsonBackReference
     private Set<Slot> slotSet;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
-    private User userId;
 }

@@ -21,8 +21,4 @@ public class UserInvoice {
     @ManyToOne
     @JoinColumn(name = "slot_id", nullable = false, referencedColumnName = "slot_id")
     private Slot slotId;
-
-    @ManyToOne
-    @JoinColumn(name = "vehicle_id", nullable = false, referencedColumnName = "vehicle_id")
-    private Vehicle vehicleId;
 }

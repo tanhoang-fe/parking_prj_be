@@ -14,7 +14,6 @@ public class SlotType {
     @Column(name = "slot_type_id")
     private Long slotTypeId;
     private String slotTypeName;
-    private Double pricePerDay;
 
     @OneToMany(mappedBy = "slotTypeId")
     @JsonBackReference

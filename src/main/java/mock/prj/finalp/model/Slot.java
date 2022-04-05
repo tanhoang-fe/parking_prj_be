@@ -17,6 +17,11 @@ public class Slot {
     private String status;
     private Double slotPrice;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private User userId;
+
     @ManyToOne
     @JoinColumn(name = "slot_type_id", nullable = false, referencedColumnName = "slot_type_id")
     private SlotType slotTypeId;
