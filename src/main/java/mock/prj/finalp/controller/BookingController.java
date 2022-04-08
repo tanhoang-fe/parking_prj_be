@@ -1,7 +1,9 @@
 package mock.prj.finalp.controller;
 
+import mock.prj.finalp.dto.BookingDTO;
 import mock.prj.finalp.dto.SlotDTO;
 import mock.prj.finalp.dto.UserDTO;
+import mock.prj.finalp.dto.UserInvoiceDTO;
 import mock.prj.finalp.model.ParkingLot;
 import mock.prj.finalp.model.Slot;
 import mock.prj.finalp.model.UserInvoice;
@@ -13,11 +15,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Book;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -44,7 +48,7 @@ public class BookingController {
     }
 
     @GetMapping("/{parkingLotId}")
-    public ResponseEntity<List<SlotDTO>> getSlotByParkingLotID(Long parkingLotId) {
+    public ResponseEntity<List<SlotDTO>> getSlotByParkingLotID(@PathVariable("parkingLotId") Long parkingLotId) {
         List <Slot> slots=slotService.findSlotByParkingLotId(parkingLotId);
         List<SlotDTO> subSlot = slots.stream()
                     .map(this::convertToDTO)
@@ -53,6 +57,13 @@ public class BookingController {
 
     }
 
+//    @PostMapping("/booking/{slotId}")
+//    public ResponseEntity<BookingDTO> bookingSlot(@PathVariable("slotId") String slotId) {
+//        BookingDTO bookingDTO=new BookingDTO();
+//        Optional<Slot> slotOptional = slotService.getById(slotId);
+//
+//    }
+
 //    @GetMapping ("/{parkingLotId}")
 //    public ResponseEntity<List<SlotDTO>> getAllSlotByStatus
 
@@ -60,21 +71,4 @@ public class BookingController {
 //
 //    }
 
-    public long duration(String dateStart, String dateEnd) {
-//HH converts hour in 24 hours format (0-23), day calculation
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        Date d1 = null;
-        Date d2 = null;
-        long diffDays=0;
-        try {
-            d1 = format.parse(dateStart);
-            d2 = format.parse(dateEnd);
-            long diff = d2.getTime() - d1.getTime();
-            diffDays=diff / (24 * 60 * 60 * 1000);
-            return diffDays;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return diffDays;
-    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface SlotRepository extends JpaRepository<Slot, Long> {
     List<Slot> findAllByStatus(String status);
 
-    @Query("SELECT s FROM Slot s WHERE s.parkingLotId = ?1")
+    @Query("SELECT s FROM Slot s WHERE s.parkingLot.parkingLotId = ?1")
     List<Slot> findAllByParkingLotId(Long id);
 
 }

@@ -5,7 +5,7 @@ import mock.prj.finalp.model.Slot;
 
 import java.util.List;
 
-public interface SlotService {
+public interface SlotService extends IService {
     Slot findById(Long id);
 
     void booking();

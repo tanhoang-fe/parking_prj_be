@@ -1,6 +1,7 @@
 package mock.prj.finalp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,13 +13,13 @@ import java.util.Set;
 @Data
 public class ParkingLot {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "parking_lot_id")
     private Long parkingLotId;
     private String parkingLotName;
-    private String status;
+    private String address;
 
-    @OneToMany(mappedBy = "parkingLotId")
-    private Set<Slot> slotSet;
+    @JsonIgnore
+    @OneToMany(mappedBy = "parkingLot")
+    private Set<Slot> slots;
 
 }

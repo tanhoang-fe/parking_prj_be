@@ -21,13 +21,13 @@ public class User {
     private String username;
     private String password;
     private String role;
-    private String licensePlate;
-    private String vehicleColor;
-    private String vehicleBrand;
-    private String vehicleType;
-    @OneToMany(mappedBy = "userId")
+
+    @OneToMany(mappedBy="user")
+    private Set<Vehicle> vehicles;
+
+    @OneToMany(mappedBy = "user")
     private Set<UserInvoice> userInvoiceSet;
 
-    @OneToOne(mappedBy = "userId")
-    private Slot slotId;
+    @OneToOne(mappedBy = "user")
+    private Slot slot;
 }

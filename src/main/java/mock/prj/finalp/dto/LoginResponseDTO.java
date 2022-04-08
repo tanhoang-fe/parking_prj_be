@@ -16,9 +16,6 @@ public class LoginResponseDTO {
     private String address;
     private String username;
     private String role;
-    private String licensePlate;
-    private String vehicleColor;
-    private String vehicleBrand;
-    private String vehicleType;
+    private Long vehicleId;
 
 }

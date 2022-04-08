@@ -17,7 +17,7 @@ public class SlotDTO {
     private String slotName;
     private String status;
     private Double slotPrice;
-    private User userUserId;
-    private Long slotTypeSlotTypeId;
-    private Long parkingLotParkingLotId;
+    private Long userId;
+    private String slotTypeName;
+    private Long parkingLotId;
 }

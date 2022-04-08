@@ -15,7 +15,6 @@ public class SlotType {
     private Long slotTypeId;
     private String slotTypeName;
 
-    @OneToMany(mappedBy = "slotTypeId")
-
-    private Set<Slot> slotSet;
+    @OneToMany(mappedBy = "slotType")
+    private Set<Slot> slots;
 }
