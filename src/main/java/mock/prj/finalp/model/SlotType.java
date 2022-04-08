@@ -16,6 +16,6 @@ public class SlotType {
     private String slotTypeName;
 
     @OneToMany(mappedBy = "slotTypeId")
-    @JsonBackReference
+
     private Set<Slot> slotSet;
 }

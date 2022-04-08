@@ -1,12 +1,13 @@
 package mock.prj.finalp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name="users")
 @Data
 public class User {
     @Id
@@ -25,10 +26,8 @@ public class User {
     private String vehicleBrand;
     private String vehicleType;
     @OneToMany(mappedBy = "userId")
-    @JsonBackReference
     private Set<UserInvoice> userInvoiceSet;
 
     @OneToOne(mappedBy = "userId")
-    @JsonBackReference
     private Slot slotId;
 }

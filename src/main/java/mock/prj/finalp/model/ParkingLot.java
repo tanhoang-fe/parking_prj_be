@@ -2,6 +2,8 @@ package mock.prj.finalp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,12 +17,8 @@ public class ParkingLot {
     private Long parkingLotId;
     private String parkingLotName;
     private String status;
-    private Long carSlots;
-    private Long motorSlots;
-    private Long vanSlots;
 
     @OneToMany(mappedBy = "parkingLotId")
-    @JsonBackReference
     private Set<Slot> slotSet;
 
 }

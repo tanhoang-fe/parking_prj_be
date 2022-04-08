@@ -4,8 +4,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
+@Data
 public class UserInvoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +14,7 @@ public class UserInvoice {
     private Long userInvoiceId;
     private String startDate;
     private String endDate;
+    private double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")

@@ -1,28 +1,80 @@
 package mock.prj.finalp.controller;
 
+import mock.prj.finalp.dto.SlotDTO;
+import mock.prj.finalp.dto.UserDTO;
+import mock.prj.finalp.model.ParkingLot;
 import mock.prj.finalp.model.Slot;
+import mock.prj.finalp.model.UserInvoice;
 import mock.prj.finalp.services.SlotService;
+import mock.prj.finalp.services.impl.SlotServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/parking")
 public class BookingController {
     @Autowired
-    SlotService slotService;
+    SlotServiceImpl slotService;
+    @Autowired
+    ModelMapper modelMapper;
 
-    //KienHQ
-    @GetMapping("/slot/{id}")
-    public ResponseEntity<?> checkStatus(@RequestBody @PathVariable("id") Long id) {
-        Slot slot = slotService.findById(id);
-        if (slot.getStatus().equals("free")) {
-            return new ResponseEntity<>(slot, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<SlotDTO>> getAllSlotByStatus(@PathVariable("status") String status) {
+        List<Slot> slots = slotService.findSlotByStatus(status);
+        List<SlotDTO> subSlot = slots.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(subSlot, HttpStatus.OK);
     }
 
-    //KienHQ
-        
+    public SlotDTO convertToDTO(Slot slot) {
+        SlotDTO snotDTO = modelMapper.map(slot, SlotDTO.class);
+        return snotDTO;
+    }
+
+    @GetMapping("/{parkingLotId}")
+    public ResponseEntity<List<SlotDTO>> getSlotByParkingLotID(Long parkingLotId) {
+        List <Slot> slots=slotService.findSlotByParkingLotId(parkingLotId);
+        List<SlotDTO> subSlot = slots.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+        return new ResponseEntity<>(subSlot,HttpStatus.OK);
+
+    }
+
+//    @GetMapping ("/{parkingLotId}")
+//    public ResponseEntity<List<SlotDTO>> getAllSlotByStatus
+
+//    public double totalPrice() {
+//
+//    }
+
+    public long duration(String dateStart, String dateEnd) {
+//HH converts hour in 24 hours format (0-23), day calculation
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date d1 = null;
+        Date d2 = null;
+        long diffDays=0;
+        try {
+            d1 = format.parse(dateStart);
+            d2 = format.parse(dateEnd);
+            long diff = d2.getTime() - d1.getTime();
+            diffDays=diff / (24 * 60 * 60 * 1000);
+            return diffDays;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return diffDays;
+    }
 }
