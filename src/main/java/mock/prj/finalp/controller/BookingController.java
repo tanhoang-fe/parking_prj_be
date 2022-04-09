@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,13 +35,13 @@ public class BookingController {
     @Autowired
     UserInvoiceServiceImpl userInvoiceService;
 
-    @PostMapping("/name")
+    @PostMapping
     public ResponseEntity<UserInvoiceDTO> booking(UserInvoiceDTO userInvoiceDTO) {
         UserInvoice userInvoice = convertToEntity(userInvoiceDTO);
-        Optional<Slot> slotOptional = slotService.getById(userInvoice.getId());
-        Slot slot = modelMapper.map(slotOptional,Slot.class);
-        Double totalPrice =( slot.getSlotPricePerDay() * userInvoice.getPackageType().dayInPackage );
-        userInvoice.setTotalPrice(totalPrice);
+//        Optional<Slot> slotOptional = slotService.getById(userInvoice.getId());
+//        Slot slot = modelMapper.map(slotOptional,Slot.class);
+//        Double totalPrice =( slot.getSlotPricePerDay() * userInvoice.getPackageType().dayInPackage );
+//        userInvoice.setTotalPrice(totalPrice);
         Long timestamp= new Date().getTime();
         userInvoice.setCreatedAt(timestamp);
         return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.map(userInvoiceService.save(userInvoice), UserInvoiceDTO.class));
@@ -51,3 +52,4 @@ public class BookingController {
         return userInvoice;
     }
 }
+    
