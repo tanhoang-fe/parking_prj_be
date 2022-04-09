@@ -1,4 +1,6 @@
 package mock.prj.finalp.services;
 
-public interface UserInvoiceService {
+import mock.prj.finalp.model.UserInvoice;
+
+public interface UserInvoiceService extends IService<UserInvoice,Long>{
 }

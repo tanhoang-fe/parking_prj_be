@@ -14,9 +14,8 @@ public class UserInvoice {
     @Column(name = "user_invoice_id")
     private Long id;
     private PackageType packageType;
-    private Date startDate;
-    private Date endDate;
-    private Date createdAt;
+    private Long startDate;
+    private Long createdAt;
     private double totalPrice;
 
     @ManyToOne

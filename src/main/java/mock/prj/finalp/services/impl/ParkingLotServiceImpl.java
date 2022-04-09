@@ -1,5 +1,6 @@
 package mock.prj.finalp.services.impl;
 
+import mock.prj.finalp.model.ParkingLot;
 import mock.prj.finalp.repositories.ParkingLotRepository;
 import mock.prj.finalp.services.ParkingLotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,19 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     }
 
     @Override
-    public Optional getById(Object key) {
+    public Optional<ParkingLot> getById(Long key) {
         return Optional.empty();
     }
 
     @Override
-    public Object save(Object entity) {
+    public ParkingLot save(ParkingLot entity) {
         return null;
     }
 
     @Override
-    public void deleteById(Object key) {
+    public void deleteById(Long key) {
 
     }
+
 }
+

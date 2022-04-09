@@ -34,7 +34,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User entity) {
-        return userRepository.save(entity);    }
+        return userRepository.save(entity);
+    }
 
     @Override
     public void deleteById(Long key) {

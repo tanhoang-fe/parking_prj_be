@@ -1,4 +1,6 @@
 package mock.prj.finalp.services;
 
-public interface VehicleService extends IService{
+import mock.prj.finalp.model.Vehicle;
+
+public interface VehicleService extends IService<Vehicle,String>{
 }

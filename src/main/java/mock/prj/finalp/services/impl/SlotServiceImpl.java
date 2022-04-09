@@ -26,17 +26,18 @@ public class SlotServiceImpl implements SlotService {
     }
 
     @Override
-    public Optional getById(Object key) {
-        return Optional.empty();
+    public Optional<Slot> getById(Long id) {
+        return slotRepository.findById(id);
     }
 
     @Override
-    public Object save(Object entity) {
-        return null;
+    public Slot save(Slot slot) {
+        return slotRepository.save(slot);
     }
 
     @Override
-    public void deleteById(Object key) {
-
+    public void deleteById(Long key) {
     }
+
+
 }

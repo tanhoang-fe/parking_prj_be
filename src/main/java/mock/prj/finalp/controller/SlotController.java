@@ -35,7 +35,7 @@ public class SlotController {
         return snotDTO;
     }
 
-    @GetMapping("/parkingId/{parkingId}")
+    @GetMapping("/n/{parkingId}")
     public ResponseEntity<List<SlotDTO>> getSlotByParkingLotID(@PathVariable("parkingId") Long parkingId) {
         List <Slot> slots=slotService.findSlotByParkingLotId(parkingId);
         List<SlotDTO> subSlot = slots.stream()
