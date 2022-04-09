@@ -1,6 +1,5 @@
 package mock.prj.finalp.repositories;
 
-import mock.prj.finalp.model.ParkingLot;
 import mock.prj.finalp.model.Slot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface SlotRepository extends JpaRepository<Slot, Long> {
-    List<Slot> findAllByStatus(String status);
+//    List<Slot> findAllByStatus(Status status);
 
-    @Query("SELECT s FROM Slot s WHERE s.parkingLot.parkingLotId = ?1")
+    @Query("SELECT s FROM Slot s WHERE s.parkingLot.id = ?1")
     List<Slot> findAllByParkingLotId(Long id);
 
 }

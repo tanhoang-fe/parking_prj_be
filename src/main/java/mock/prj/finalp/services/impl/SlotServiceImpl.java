@@ -1,6 +1,5 @@
 package mock.prj.finalp.services.impl;
 
-import mock.prj.finalp.model.ParkingLot;
 import mock.prj.finalp.model.Slot;
 import mock.prj.finalp.repositories.SlotRepository;
 import mock.prj.finalp.services.SlotService;
@@ -15,20 +14,6 @@ public class SlotServiceImpl implements SlotService {
     @Autowired
     SlotRepository slotRepository;
 
-    @Override
-    public Slot findById(Long id) {
-        return slotRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void booking() {
-
-    }
-
-    @Override
-    public List<Slot> findSlotByStatus(String status) {
-        return this.slotRepository.findAllByStatus(status);
-    }
 
     @Override
     public List<Slot> findSlotByParkingLotId(Long id) {
@@ -36,8 +21,8 @@ public class SlotServiceImpl implements SlotService {
     }
 
     @Override
-    public List getAll() {
-        return null;
+    public List<Slot> getAll() {
+        return slotRepository.findAll();
     }
 
     @Override

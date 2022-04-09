@@ -14,8 +14,8 @@ import java.util.Set;
 public class ParkingLot {
     @Id
     @Column(name = "parking_lot_id")
-    private Long parkingLotId;
-    private String parkingLotName;
+    private Long id;
+    private String parkingName;
     private String address;
 
     @JsonIgnore

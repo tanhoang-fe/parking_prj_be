@@ -12,18 +12,21 @@ public class UserInvoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_invoice_id")
-    private Long userInvoiceId;
+    private Long id;
     private PackageType packageType;
     private Date startDate;
     private Date endDate;
+    private Date createdAt;
     private double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name="slotId")
+    @ManyToOne
+    @JoinColumn(name="vehicle_id", nullable = false, referencedColumnName = "vehicle_id")
+    private Vehicle vehicle;
+
 
     @ManyToOne
     @JoinColumn(name = "slot_id", nullable = false, referencedColumnName = "slot_id")

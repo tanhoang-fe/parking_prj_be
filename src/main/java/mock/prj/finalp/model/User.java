@@ -13,14 +13,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long userId;
+    private Long id;
     private String name;
     private String email;
     private String phone;
-    private String address;
     private String username;
     private String password;
-    private String role;
 
     @OneToMany(mappedBy="user")
     private Set<Vehicle> vehicles;
@@ -28,6 +26,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<UserInvoice> userInvoiceSet;
 
-    @OneToOne(mappedBy = "user")
-    private Slot slot;
+    @OneToMany(mappedBy = "user")
+    private Set<Slot> slots;
 }

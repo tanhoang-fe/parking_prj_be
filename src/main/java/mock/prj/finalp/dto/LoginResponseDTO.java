@@ -3,19 +3,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mock.prj.finalp.model.Vehicle;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginResponseDTO {
-    private Long userId;
+    private Long id;
     private String name;
     private String email;
     private String phone;
-    private String address;
     private String username;
-    private String role;
-    private Long vehicleId;
-
 }
