@@ -9,7 +9,10 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+//        modelMapper.getConfiguration()
+//                .setMatchingStrategy(MatchingStrategies.STRICT);
+        return modelMapper;
     }
 
 //    @Bean

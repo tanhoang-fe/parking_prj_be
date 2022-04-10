@@ -18,5 +18,5 @@ public class UserDTO {
     private String address;
     private String username;
     private String role;
-    private Long vehicleId;
+    private String vehicleId;
 }

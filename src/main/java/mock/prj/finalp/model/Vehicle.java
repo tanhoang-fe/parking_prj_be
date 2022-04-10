@@ -1,10 +1,14 @@
 package mock.prj.finalp.model;
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Vehicle {
     @Id
     @Column(name = "vehicle_id")

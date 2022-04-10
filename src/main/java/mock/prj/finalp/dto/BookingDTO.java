@@ -11,6 +11,7 @@ import mock.prj.finalp.model.PackageType;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookingDTO {
+    private Long slotId;
     private Long slotName;
     private String licensePlate;
     private PackageType packageType;

@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -28,7 +29,13 @@ public class AccountController {
         Optional<User> accountOptional=userService.getUserByUsername(user.getUsername());
         return (ResponseEntity<LoginResponseDTO>) accountOptional.map(acc -> {
             if (user.getPassword().equals(acc.getPassword())) {
-                return ResponseEntity.ok(modelMapper.map(acc,LoginResponseDTO.class));
+                LoginResponseDTO a = modelMapper.map(acc, LoginResponseDTO.class);
+                a.setVehicleIds(new HashSet<String>());
+                Set<String> vehicleIds = a.getVehicleIds();
+                acc.getVehicles().forEach(v -> {
+                    vehicleIds.add(v.getId());
+                });
+                return ResponseEntity.ok(a);
             }
             return new ResponseEntity<String>("Wrong Username or Password1", HttpStatus.BAD_REQUEST);
         }).orElseGet(()->new ResponseEntity<String>("Wrong Username or Password",HttpStatus.BAD_REQUEST));

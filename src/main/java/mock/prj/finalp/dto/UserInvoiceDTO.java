@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mock.prj.finalp.model.PackageType;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,6 +19,6 @@ public class UserInvoiceDTO {
     private Long createdAt;
     private double totalPrice;
     private Long userId;
-    private Long vehicleId;
+    private String vehicleId;
     private Long slotId;
 }

@@ -27,7 +27,7 @@ public class UserInvoiceServiceImpl implements UserInvoiceService {
 
     @Override
     public UserInvoice save(UserInvoice entity) {
-        return null;
+        return userInvoiceRepository.save(entity);
     }
 
     @Override

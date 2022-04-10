@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mock.prj.finalp.model.Vehicle;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,4 +17,5 @@ public class LoginResponseDTO {
     private String email;
     private String phone;
     private String username;
+    private Set<String> vehicleIds;
 }
