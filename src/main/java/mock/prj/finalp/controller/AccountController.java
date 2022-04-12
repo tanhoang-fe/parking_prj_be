@@ -6,13 +6,10 @@ import org.modelmapper.ModelMapper;
 import mock.prj.finalp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/user")
@@ -24,8 +21,8 @@ public class AccountController {
 
    @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login (@RequestBody UserDTO userDTO) {
-        Optional<User> accountOptional=userService.getUserByUsername(userDTO.getUsername());
-        return (ResponseEntity<LoginResponseDTO>) accountOptional.map(acc -> {
+        Optional<User> userOptional=userService.getUserByUsername(userDTO.getUsername());
+        return (ResponseEntity<LoginResponseDTO>) userOptional.map(acc -> {
             if (userDTO.getPassword().equals(acc.getPassword())) {
                 LoginResponseDTO a = modelMapper.map(acc, LoginResponseDTO.class);
 //                a.setVehicleIds(new HashSet<String>());
@@ -41,15 +38,26 @@ public class AccountController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserDTO> signUp(@RequestBody UserDTO userDTO) {
-
-        User user = convertToEntity(userDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.map(userService.save(user), UserDTO.class));
+       if (!userService.existedUsername(userDTO.getUsername()))
+       {
+            User user = convertToEntity(userDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.map(userService.save(user), UserDTO.class));
+        } else return null;
     }
     public User convertToEntity(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
         return user;
     }
 
+//    @GetMapping("/info")
+//    public ResponseEntity<LoginResponseDTO> userInfo(@RequestBody User user) {
+//
+//        Optional<User> userOptional = userService.userRepository.findByUsername(user.getUsername());
+//
+//        return userOptional
+//                .map(user1 -> ResponseEntity.ok(modelMapper.map(user1, LoginResponseDTO.class)))
+//                .orElse(ResponseEntity.notFound().build());
+//    }
 
 
 }

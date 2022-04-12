@@ -3,6 +3,7 @@ package mock.prj.finalp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -15,6 +16,7 @@ public class UserInvoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_invoice_id")
     private Long id;
+    @Enumerated(EnumType.STRING)
     private PackageType packageType;
     private Long startDate;
     private Long createdAt;
@@ -31,4 +33,9 @@ public class UserInvoice {
     @ManyToOne
     @JoinColumn(name = "slot_id", nullable = false, referencedColumnName = "slot_id")
     private Slot slot;
+
+    @ManyToOne
+    @JoinColumn(name = "parking_lot_id", nullable = false, referencedColumnName = "parking_lot_id")
+    private ParkingLot parkingLot;
+
 }

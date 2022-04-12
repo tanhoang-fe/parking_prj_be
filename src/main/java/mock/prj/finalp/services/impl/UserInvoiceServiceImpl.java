@@ -22,7 +22,7 @@ public class UserInvoiceServiceImpl implements UserInvoiceService {
 
     @Override
     public Optional<UserInvoice> getById(Long key) {
-        return Optional.empty();
+        return userInvoiceRepository.findById(key);
     }
 
     @Override
@@ -36,4 +36,8 @@ public class UserInvoiceServiceImpl implements UserInvoiceService {
     }
 
 
+    @Override
+    public List<UserInvoice> findAllByUserId(Long userId) {
+        return userInvoiceRepository.findAllByUserId(userId);
+    }
 }

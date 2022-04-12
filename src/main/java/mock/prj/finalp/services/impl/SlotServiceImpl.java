@@ -18,7 +18,7 @@ public class SlotServiceImpl implements SlotService {
 
 
     @Override
-    public List<Slot> findSlotByParkingLotId(Long id) {
+    public List<Slot> findSlotByParkingLotId(String id) {
         return this.slotRepository.findAllByParkingLotId(id);
     }
 

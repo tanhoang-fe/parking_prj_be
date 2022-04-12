@@ -15,7 +15,6 @@ public class Vehicle {
     private String id;
     private String vehicleColor;
     private String vehicleBrand;
-    private String vehicleType;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")

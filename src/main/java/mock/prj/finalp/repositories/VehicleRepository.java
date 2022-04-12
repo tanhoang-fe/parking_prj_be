@@ -1,4 +1,7 @@
 package mock.prj.finalp.repositories;
 
-public interface VehicleRepository {
+import mock.prj.finalp.model.Vehicle;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface VehicleRepository extends JpaRepository<Vehicle,String> {
 }

@@ -20,6 +20,9 @@ public class UserInvoiceDTO {
     private double totalPrice;
     private Long userId;
     private String vehicleId;
+    private String vehicleColor;
+    private String vehicleBrand;
     private String slotName;
     private String slotId;
+    private String parkingLotId;
 }

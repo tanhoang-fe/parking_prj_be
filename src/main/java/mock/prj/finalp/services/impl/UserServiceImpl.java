@@ -23,6 +23,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean existedUsername(String username) {
+        return userRepository.existsUserByUsername(username);
+    }
+
+    @Override
     public List<User> getAll() {
         return null;
     }

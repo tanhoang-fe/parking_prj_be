@@ -36,8 +36,8 @@ public class SlotController {
         return snotDTO;
     }
 
-    @GetMapping("/{parkingId}")
-    public ResponseEntity<List<SlotDTO>> getSlotByParkingLotID(@PathVariable("parkingId") Long parkingId) {
+    @GetMapping("/parking/{parkingId}")
+    public ResponseEntity<List<SlotDTO>> getSlotByParkingLotID(@PathVariable("parkingId") String parkingId) {
         List <Slot> slots=slotService.findSlotByParkingLotId(parkingId);
         List<SlotDTO> subSlot = slots.stream()
                     .map(this::convertToDTO)
@@ -45,13 +45,13 @@ public class SlotController {
         return new ResponseEntity<>(subSlot,HttpStatus.OK);
     }
 
-//    @GetMapping("/{slotId}")
-//    public ResponseEntity<SlotDTO> bookingSlot(@PathVariable("slotId") String slotId) {
-//        Optional<Slot> slotOptional = slotService.getById(slotId);
-//        return slotOptional
-//                .map(slot -> ResponseEntity.ok(modelMapper.map(slot, SlotDTO.class)))
-//                .orElse(ResponseEntity.notFound().build());
-//    }
+    @GetMapping("/{slotName}")
+    public ResponseEntity<SlotDTO> getSlotBySlotId(@PathVariable("slotName") String slotName) {
+        Optional<Slot> slotOptional = slotService.getBySlotName(slotName);
+        return slotOptional
+                .map(slot -> ResponseEntity.ok(modelMapper.map(slot, SlotDTO.class)))
+                .orElse(ResponseEntity.notFound().build());
+    }
 
 //    @GetMapping ("/{parkingLotId}")
 //    public ResponseEntity<List<SlotDTO>> getAllSlotByStatus
