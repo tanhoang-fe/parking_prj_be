@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ParkingDTO {
-    private String parkingName;
+    private String name;
     private String address;
+    private Long id;
 }

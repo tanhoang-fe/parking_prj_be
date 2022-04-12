@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -35,21 +36,21 @@ public class SlotController {
         return snotDTO;
     }
 
-    @GetMapping("/n/{parkingId}")
+    @GetMapping("/{parkingId}")
     public ResponseEntity<List<SlotDTO>> getSlotByParkingLotID(@PathVariable("parkingId") Long parkingId) {
         List <Slot> slots=slotService.findSlotByParkingLotId(parkingId);
         List<SlotDTO> subSlot = slots.stream()
                     .map(this::convertToDTO)
                     .collect(Collectors.toList());
         return new ResponseEntity<>(subSlot,HttpStatus.OK);
-
     }
 
-//    @PostMapping("/booking/{slotId}")
-//    public ResponseEntity<BookingDTO> bookingSlot(@PathVariable("slotId") String slotId) {
-//        BookingDTO bookingDTO=new BookingDTO();
+//    @GetMapping("/{slotId}")
+//    public ResponseEntity<SlotDTO> bookingSlot(@PathVariable("slotId") String slotId) {
 //        Optional<Slot> slotOptional = slotService.getById(slotId);
-//
+//        return slotOptional
+//                .map(slot -> ResponseEntity.ok(modelMapper.map(slot, SlotDTO.class)))
+//                .orElse(ResponseEntity.notFound().build());
 //    }
 
 //    @GetMapping ("/{parkingLotId}")

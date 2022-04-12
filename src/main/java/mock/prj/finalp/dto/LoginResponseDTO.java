@@ -17,5 +17,5 @@ public class LoginResponseDTO {
     private String email;
     private String phone;
     private String username;
-    private Set<String> vehicleIds;
+//    private Set<String> vehicleIds;
 }

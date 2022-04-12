@@ -13,9 +13,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Slot {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "slot_id")
-    private Long id;
+    private String id;
     private String slotName;
      private Double slotPricePerDay;
 

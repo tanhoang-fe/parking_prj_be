@@ -35,6 +35,7 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<UserInvoiceDTO> booking(@RequestBody UserInvoiceDTO userInvoiceDTO) throws NoSuchFieldException {
         UserInvoice userInvoice = convertToEntity(userInvoiceDTO);
+        System.out.println(userInvoice.getSlot().getId());
         Optional<Slot> slotOptional = slotService.getById(userInvoice.getSlot().getId());
         if(slotOptional.isEmpty()) return ResponseEntity.notFound().build();
         else {
@@ -56,8 +57,9 @@ public class BookingController {
         Slot slot = new Slot();
         userInvoice.setUser(new User());
         userInvoice.getUser().setId(userInvoiceDTO.getUserId());
-        userInvoice.setSlot(new Slot());
+        userInvoice.setSlot(new Slot ());
         userInvoice.getSlot().setId(userInvoiceDTO.getSlotId());
+        userInvoice.getSlot().setSlotName(userInvoiceDTO.getSlotName());
         userInvoice.setVehicle(new Vehicle());
         userInvoice.getVehicle().setId(userInvoiceDTO.getVehicleId());
         userInvoice.setPackageType(userInvoiceDTO.getPackageType());

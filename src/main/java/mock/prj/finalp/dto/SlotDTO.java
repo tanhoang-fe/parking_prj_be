@@ -10,9 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SlotDTO {
-    private Long slotId;
-    private String slotName;
-    private Double slotPrice;
+    private String id;
+    private String name;
+    private Double price;
     private Long userId;
     private Long parkingId;
     private String vehicleId;

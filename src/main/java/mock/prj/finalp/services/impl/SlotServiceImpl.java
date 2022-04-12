@@ -6,8 +6,10 @@ import mock.prj.finalp.services.SlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class SlotServiceImpl implements SlotService {
@@ -21,12 +23,34 @@ public class SlotServiceImpl implements SlotService {
     }
 
     @Override
+    public Optional<Slot> getBySlotName(String slotName) {
+        return slotRepository.findBySlotName(slotName);
+    }
+
+    @Override
+    public String generateSlotId(String id) {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        System.out.println(generatedString);
+        return generatedString;
+    }
+
+    @Override
     public List<Slot> getAll() {
         return slotRepository.findAll();
     }
 
     @Override
-    public Optional<Slot> getById(Long id) {
+    public Optional<Slot> getById(String id) {
         return slotRepository.findById(id);
     }
 
@@ -36,7 +60,7 @@ public class SlotServiceImpl implements SlotService {
     }
 
     @Override
-    public void deleteById(Long key) {
+    public void deleteById(String key) {
     }
 
 

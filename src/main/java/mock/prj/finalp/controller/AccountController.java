@@ -6,18 +6,16 @@ import org.modelmapper.ModelMapper;
 import mock.prj.finalp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class AccountController {
     @Autowired
     private UserServiceImpl userService;
@@ -25,28 +23,28 @@ public class AccountController {
     private ModelMapper modelMapper;
 
    @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login (@RequestBody User user) {
-        Optional<User> accountOptional=userService.getUserByUsername(user.getUsername());
+    public ResponseEntity<LoginResponseDTO> login (@RequestBody UserDTO userDTO) {
+        Optional<User> accountOptional=userService.getUserByUsername(userDTO.getUsername());
         return (ResponseEntity<LoginResponseDTO>) accountOptional.map(acc -> {
-            if (user.getPassword().equals(acc.getPassword())) {
+            if (userDTO.getPassword().equals(acc.getPassword())) {
                 LoginResponseDTO a = modelMapper.map(acc, LoginResponseDTO.class);
-                a.setVehicleIds(new HashSet<String>());
-                Set<String> vehicleIds = a.getVehicleIds();
-                acc.getVehicles().forEach(v -> {
-                    vehicleIds.add(v.getId());
-                });
+//                a.setVehicleIds(new HashSet<String>());
+//                Set<String> vehicleIds = a.getVehicleIds();
+//                acc.getVehicles().forEach(v -> {
+//                    vehicleIds.add(v.getId());
+//                });
                 return ResponseEntity.ok(a);
             }
             return new ResponseEntity<String>("Wrong Username or Password1", HttpStatus.BAD_REQUEST);
         }).orElseGet(()->new ResponseEntity<String>("Wrong Username or Password",HttpStatus.BAD_REQUEST));
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserDTO> createEmployee(@RequestBody UserDTO userDTO) {
+    @PostMapping("/signup")
+    public ResponseEntity<UserDTO> signUp(@RequestBody UserDTO userDTO) {
+
         User user = convertToEntity(userDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(modelMapper.map(userService.save(user), UserDTO.class));
     }
-
     public User convertToEntity(UserDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
         return user;

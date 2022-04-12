@@ -6,12 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface SlotRepository extends JpaRepository<Slot, Long> {
+public interface SlotRepository extends JpaRepository<Slot, String> {
 //    List<Slot> findAllByStatus(Status status);
 
     @Query("SELECT s FROM Slot s WHERE s.parkingLot.id = ?1")
     List<Slot> findAllByParkingLotId(Long id);
 
+    Optional<Slot> findBySlotName(String slotName);
 }
