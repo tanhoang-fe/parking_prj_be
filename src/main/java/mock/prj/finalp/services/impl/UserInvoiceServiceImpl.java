@@ -17,7 +17,7 @@ public class UserInvoiceServiceImpl implements UserInvoiceService {
 
     @Override
     public List getAll() {
-        return null;
+        return userInvoiceRepository.findAll()  ;
     }
 
     @Override

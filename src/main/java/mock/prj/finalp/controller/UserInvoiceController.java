@@ -29,9 +29,18 @@ public class UserInvoiceController {
     @Autowired
     ModelMapper modelMapper;
 
+    @GetMapping
+    public ResponseEntity<List<UserInvoiceDTO>> getAll() {
+        List<UserInvoice> userInvoices=userInvoiceService.getAll();
+        List<UserInvoiceDTO> subUserInvoices=userInvoices.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(subUserInvoices,HttpStatus.OK);
+    }
+
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<UserInvoiceDTO>> getAll(@PathVariable("userId") Long userId) {
+    public ResponseEntity<List<UserInvoiceDTO>> getAllByUserId(@PathVariable("userId") Long userId) {
         List<UserInvoice> userInvoices = userInvoiceService.findAllByUserId(userId);
         List<UserInvoiceDTO> subUserInvoiceDTO = userInvoices.stream()
                 .map(this::convertToDTO)

@@ -40,6 +40,7 @@ public class BookingController {
         vehicle.setVehicleColor(userInvoiceDTO.getVehicleColor());
         vehicle.setUser(new User());
         vehicle.getUser().setId(userInvoiceDTO.getUserId());
+        vehicle.setId(userInvoiceDTO.getVehicleId());
         vehicleService.save(vehicle);
 
         Slot slot=new Slot();
