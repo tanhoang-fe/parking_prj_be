@@ -40,7 +40,6 @@ public class BookingController {
         vehicle.setVehicleColor(userInvoiceDTO.getVehicleColor());
         vehicle.setUser(new User());
         vehicle.getUser().setId(userInvoiceDTO.getUserId());
-        vehicle.setId(userInvoiceDTO.getVehicleId());
         vehicleService.save(vehicle);
 
         Slot slot=new Slot();
@@ -54,6 +53,7 @@ public class BookingController {
         slot.getParkingLot().setId(userInvoiceDTO.getParkingLotId());
         slot.setSlotPricePerDay(100000.0);
         slotService.save(slot);
+
         UserInvoice userInvoice = convertToEntity(userInvoiceDTO);
         userInvoice.setSlot(slot);
         userInvoice.setVehicle(vehicle);

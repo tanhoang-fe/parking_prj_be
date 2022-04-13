@@ -2,6 +2,7 @@ package mock.prj.finalp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import mock.prj.finalp.dto.UserUpdateDTO;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id;
     private String name;
@@ -31,4 +32,14 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Slot> slots;
+
+
+    public User update(UserUpdateDTO userUpdateDTO){
+        if(!userUpdateDTO.getId().equals(this.getId())) throw new IllegalArgumentException("id not found");
+        this.setEmail(userUpdateDTO.getEmail());
+        this.setName(userUpdateDTO.getName());
+        this.setPhone(userUpdateDTO.getPhone());
+        return this;
+    }
+
 }

@@ -1,4 +1,5 @@
 package mock.prj.finalp.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,8 +19,10 @@ public class Vehicle {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
+    @JsonIgnore
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "vehicle")
     private Set<Slot> slots;
 }
